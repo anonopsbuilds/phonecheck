@@ -7,7 +7,7 @@ reqs = ["flask>=1.1.2", "phonenumbers>=8.12.20", "flask-limiter>=1.4", "redis>=3
 
 setuptools.setup(
     name="phonecheck",  # Replace with your own username
-    version="0.0.1",
+    version="0.0.2",
     author="Example Author",
     author_email="author@example.com",
     description="A small example package",

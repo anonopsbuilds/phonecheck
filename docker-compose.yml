@@ -12,3 +12,5 @@ services:
       APP_DATABASE: "/app/db.sqlite"
     depends_on:
       - redis
+    ports:
+      - "8443:8443"

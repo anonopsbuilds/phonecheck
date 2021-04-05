@@ -7,5 +7,3 @@ services:
       - "./nginx.conf:/app/nginx.conf"
       - "./supervisord.conf:/app/supervisord.conf"
       - "./uwsgi.ini:/app/uwsgi.ini"
-    ports:
-      - "8081:8080"

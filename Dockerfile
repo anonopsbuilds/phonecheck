@@ -19,8 +19,8 @@ COPY server.key /app/ssl/cert.key
 COPY supervisord.conf /app/supervisord.conf
 COPY nginx.conf /app/nginx.conf
 COPY uwsgi.ini /app/uwsgi.ini
-COPY --from=builder  /app/dist/phonecheck-0.0.1.tar.gz .
-RUN  pip install phonecheck-0.0.1.tar.gz supervisor && rm phonecheck-0.0.1.tar.gz && chown -R app:app /app
+COPY --from=builder  /app/dist/phonecheck-0.0.2.tar.gz .
+RUN  pip install phonecheck-0.0.2.tar.gz supervisor && rm phonecheck-0.0.2.tar.gz && chown -R app:app /app
 
 CMD [ "supervisord", "-n", "-c", "/app/supervisord.conf"]
 

@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "~=1.1.2"
+phonenumbers = "~=8.12.20"
+flask-limiter = "~=1.4"
+redis = "*"
+
+[requires]
+python_version = "3"
+
+[dev-packages]
+pytest = "~=6.2.3"
+build = "*"
+
+[pipenv]
+allow_prereleases = true

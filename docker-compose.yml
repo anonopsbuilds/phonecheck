@@ -1,0 +1,14 @@
+version: "3.3"
+
+services:
+  redis:
+    image: redis:6.2-alpine
+
+  app:
+    image: ghcr.io/overlordtm/phonecheck
+    environment:
+      FLASK_ENV: "production"
+      RATELIMIT_STORAGE: "redis://redis:6379"
+      APP_DATABASE: "/app/db.sqlite"
+    depends_on:
+      - redis

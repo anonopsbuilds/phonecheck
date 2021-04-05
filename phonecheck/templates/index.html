@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang=en>
+
+<head>
+    <meta charset=utf-8>
+    <title>Preveri FB leak</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+</head>
+
+<body>
+    <main class="container">
+        <section class="hero">
+            FB kontroler
+        </section>
+        <section class="intro">
+            Opis tralalala
+        </section>
+        <section class="form">
+            Vpisi telefonsko
+            {% if error %}
+            {{ error }}
+            {% endif %}
+            <form method="POST" action="/">
+                <input name="phone" type="tel" placeholder="+38631123456" />
+                <button type="submit"">Preveri</button>
+        </form>
+        </section>
+        <section class=" result">
+                    {% if phone %}
+                    <div>
+                        Telefon {{ phone }} {{ 'JE' if found else 'NI' }} objavljen.
+                        {% if leaked %}
+                        <dl>
+                            <dt>Ime</dt>
+                            <dd> {{ 'DA' if leaked['firstname'] else 'NE' }}</dd>
+                            <dt>Priimek</dt>
+                            <dd> {{ 'DA' if leaked['lastname'] else 'NE' }}</dd>
+                            <dt>Spol</dt>
+                            <dd> {{ 'DA' if leaked['sex'] else 'NE' }}</dd>
+                            <dt>Kraj</dt>
+                            <dd> {{ 'DA' if leaked['town'] else 'NE' }}</dd>
+                            <dt>Rojstni kraj</dt>
+                            <dd> {{ 'DA' if leaked['hometown'] else 'NE' }}</dd>
+                            <dt>Zakonski stan</dt>
+                            <dd> {{ 'DA' if leaked['marital_status'] else 'NE' }}</dd>
+                            <dt>Sluzba</dt>
+                            <dd> {{ 'DA' if leaked['job'] else 'NE' }}</dd>
+                            <dt>Datum registracije</dt>
+                            <dd> {{ 'DA' if leaked['reg_date'] else 'NE' }}</dd>
+                            <dt>E-posta</dt>
+                            <dd> {{ 'DA' if leaked['email'] else 'NE' }}</dd>
+                            <dt>Datum rojstva</dt>
+                            <dd> {{ 'DA' if leaked['dob'] else 'NE' }}</dd>
+                        </dl>
+                        {% endif %}
+
+                    </div>
+                    {% endif %}
+        </section>
+        <section class="footer">
+            
+        </section>
+    </main>
+</body>
+</html>

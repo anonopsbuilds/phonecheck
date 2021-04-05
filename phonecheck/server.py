@@ -38,43 +38,46 @@ def home():
     if request.method == "POST":
         phone = request.form.get("phone")
         if not phone:
-            return render_template("index.html", error="Invalid phone number")
+            return render_template("index.html", error="Neveljaven vnos")
 
-        cur = get_db().cursor()
-        parsed = phonenumbers.parse(phone, "SI")
-        formatted = phonenumbers.format_number(
-            parsed, phonenumbers.PhoneNumberFormat.E164
-        )
-        resp = cur.execute(
-            "SELECT `checked`, `fistname`, `lastname`, `sex`, `town`, `hometown`, `marital_status`, `job`, `reg_date`, `email`, `dob` FROM leak WHERE num = ?",
-            (formatted,),
-        ).fetchone()
-        if resp:
-            if resp[0] == 0:
-                cur.execute(
-                    "UPDATE leak SET checked = ? WHERE num = ?",
-                    (int(time.time()), formatted),
-                )
-                get_db().commit()
-            found = True
+        try:
+            cur = get_db().cursor()
+            parsed = phonenumbers.parse(phone, "SI")
+            formatted = phonenumbers.format_number(
+                parsed, phonenumbers.PhoneNumberFormat.E164
+            )
+            resp = cur.execute(
+                "SELECT `checked`, `fistname`, `lastname`, `sex`, `town`, `hometown`, `marital_status`, `job`, `reg_date`, `email`, `dob` FROM leak WHERE num = ?",
+                (formatted,),
+            ).fetchone()
+            if resp:
+                if resp[0] == 0:
+                    cur.execute(
+                        "UPDATE leak SET checked = ? WHERE num = ?",
+                        (int(time.time()), formatted),
+                    )
+                    get_db().commit()
+                found = True
 
-            leaked = {
-                "firstname": bool(resp[1]),
-                "lastname": bool(resp[2]),
-                "sex": bool(resp[3]),
-                "town": bool(resp[4]),
-                "hometown": bool(resp[5]),
-                "marital_status": bool(resp[6]),
-                "job": bool(resp[7]),
-                "reg_date": bool(resp[8]),
-                "email": bool(resp[9]),
-                "dob": bool(resp[10]),
-            }
-        else:
-            found = False
-            leaked = None
-        return render_template(
-            "index.html", found=found, phone=formatted, leaked=leaked
-        )
+                leaked = {
+                    "firstname": bool(resp[1]),
+                    "lastname": bool(resp[2]),
+                    "sex": bool(resp[3]),
+                    "town": bool(resp[4]),
+                    "hometown": bool(resp[5]),
+                    "marital_status": bool(resp[6]),
+                    "job": bool(resp[7]),
+                    "reg_date": bool(resp[8]),
+                    "email": bool(resp[9]),
+                    "dob": bool(resp[10]),
+                }
+            else:
+                found = False
+                leaked = None
+            return render_template(
+                "index.html", found=found, phone=formatted, leaked=leaked
+            )
+        except phonenumbers.phonenumberutil.NumberParseException:
+            return render_template("index.html", error="Neveljaven vnos")
     else:
         return render_template("index.html")

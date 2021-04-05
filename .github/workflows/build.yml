@@ -6,7 +6,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
-    needs: test
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2

@@ -39,14 +39,14 @@
 
 <body>
     <main class="container">
-        <section class="hero is-info">
+        <section class="hero is-info mb-4">
             <div class="hero-body">
                 <p class="title">
                     So Facebooku ukradli tudi moje podatke?
                 </p>
             </div>
         </section>
-
+        {% if not phone %}
         <section class="section intro content">
             <p>
                 Družbenemu omrežju Facebook so zaradi pomanjkljivega varovanja ukradli osebne podatke 533 milijonov
@@ -68,26 +68,7 @@
                 V primeru, da so, ti bo iskalnik pokazal, kateri so ti podatki.
             </p>
         </section>
-        <section class="section form">
-            <div class="columns is'mobile is-centered">
-                <div class="column is-half has-text-centered">
-                    {% if error %}
-                    {{ error }}
-                    {% endif %}
-                    <form method="POST" action="/" class="box">
-                        <div class="field">
-                            <label class="label">Vpiši telefonsko številko:</label>
-                            <div class="control">
-                                <input name="phone" type="tel" placeholder="+386XXXXXXXX" />
-                            </div>
-                            <p class="help">Vpirsi telefonsko številko v mednarodnem ali lokalnem formatu</p>
-                        </div>
-                        <button type="submit"">Preveri</button>
-                </form>
-                </div>
-              </div>
-        </section>
-        {% if phone %}
+        {% else %}
         <section class=" notification has-text-centered is-light {{ 'is-danger' if found else 'is-primary' }}">
                             {% if found %}
                             Telefonska številka {{ phone }} JE bila objavljena. Spodaj si lahko ogledaš tabelo, kateri podatki so bili objavljeni.
@@ -145,6 +126,27 @@
         </section>
         {% endif %}
         {% endif %}
+        <section class="section form">
+            <div class="columns is'mobile is-centered">
+                <div class="column is-half has-text-centered">
+                    {% if error %}
+                    <div class="notification has-text-centered is-light is-warning">
+                        {{ error }}
+                    </div>
+                    {% endif %}
+                    <form method="POST" action="/" class="box">
+                        <div class="field">
+                            <label class="label">Vpiši telefonsko številko:</label>
+                            <div class="control">
+                                <input name="phone" type="tel" placeholder="+386XXXXXXXX" />
+                            </div>
+                            <p class="help">Vpirsi telefonsko številko v mednarodnem ali lokalnem formatu</p>
+                        </div>
+                        <button type="submit"">Preveri</button>
+                </form>
+                </div>
+              </div>
+        </section>
         <section class="footer">
             <div class="content has-text-centered">
                 <p>

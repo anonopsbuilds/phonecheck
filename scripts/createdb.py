@@ -37,7 +37,7 @@ def createdb(input, output):
         reader = csv.reader(fixlines(f), delimiter=":")
 
         for line in reader:
-            print(line)
+            assert len(line) == 12
             
             try:
                 parsed = phonenumbers.parse("+{}".format(line[0]))

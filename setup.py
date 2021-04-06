@@ -23,9 +23,6 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     include_package_data=True,
-    package_data={
-        "phonecheck": ["templates/*"],
-    },
     packages=setuptools.find_packages(exclude=["test"]),
     python_requires=">=3.6",
     install_requires=reqs,

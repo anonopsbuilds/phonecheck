@@ -1,2 +1,2 @@
 recursive-include phonecheck/templates *
-recursive-include static/ *
+recursive-include phonecheck/static/ *

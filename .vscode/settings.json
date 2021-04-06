@@ -1,4 +1,3 @@
 {
-    "python.pythonPath": "/home/az/.local/share/virtualenvs/fb-phone-leak-nKENSGtt/bin/python",
     "python.formatting.provider": "black"
 }

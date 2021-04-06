@@ -4,14 +4,15 @@ import sys
 import os
 import argparse
 import phonenumbers
-import pickle
 import sqlite3
 import csv
-
 # phone,uid,email,first_name,last_name,gender,date_registered,birthday,location,hometown,relationship_status,education_last_year,work,groups,pages,last_update,creation_time
 
 # phone:fbid:firstname:lastname:sex:town:hometown:marital_status:job:reg_date:email:dob
-
+def fixlines(lines):
+    for line in lines:
+        line = line.replace('12:00:00', '')
+        yield line
 
 def createdb(input, output):
     db = sqlite3.connect(output)
@@ -33,10 +34,11 @@ def createdb(input, output):
     )
 
     with open(input, "r") as f:
-        reader = csv.reader(f, delimiter=":")
+        reader = csv.reader(fixlines(f), delimiter=":")
 
         for line in reader:
-            num = 1
+            print(line)
+            
             try:
                 parsed = phonenumbers.parse("+{}".format(line[0]))
                 num = phonenumbers.format_number(
@@ -70,6 +72,9 @@ def createdb(input, output):
                     email,
                     dob,
                 )
+                print(row)
+
+                print()
 
                 cur.execute(
                     """INSERT INTO leak(`num`, `fistname`, `lastname`, `sex`, `town`, `hometown`, `marital_status`, `job`, `reg_date`, `email`, `dob`)

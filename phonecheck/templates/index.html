@@ -3,7 +3,7 @@
 
 <head>
     <meta charset=utf-8>
-    <title>Preveri FB leak</title>
+    <title>So Facebooku ukradli tudi moje podatke?</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
     <link rel="stylesheet" href="{{ url_for('static', filename='bulma.min.css') }}" />
 
@@ -90,7 +90,7 @@
         {% if phone %}
         <section class=" notification has-text-centered is-light {{ 'is-danger' if found else 'is-primary' }}">
                             {% if found %}
-                            Telefon {{ phone }} JE objavljen.
+                            Telefonska številka {{ phone }} JE bila objavljena. Spodaj si lahko ogledaš tabelo, kateri podatki so bili objavljeni.
                             {% else %}
                             Tvoji podatki tokrat niso bili ukradeni in objavljeni. Vseeno pa razmisli, komu zaupaš svoje
                             podatke in če je zaupanja vreden.
@@ -98,8 +98,8 @@
         </section>
         {% if leaked %}
         <section>
-            <h6 class="title is-6 has-text-centered">Obljavljeni so bili naslednji tipi podatkov za dano telefonsko
-                številko</h6>
+            <h6 class="title is-6 has-text-centered">Obljavljeni so bili naslednji tipi podatkov za telefonsko
+                številko {{ phone }}</h6>
             <table class="table center">
                 <thead>
                     <th>Tip podatka</th>

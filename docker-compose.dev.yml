@@ -7,3 +7,5 @@ services:
       - "./nginx.conf:/app/nginx.conf"
       - "./supervisord.conf:/app/supervisord.conf"
       - "./uwsgi.ini:/app/uwsgi.ini"
+      - "./server.crt:/app/ssl/cert.pem:ro"
+      - "./server.key:/app/ssl/cert.key:ro"

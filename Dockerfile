@@ -14,8 +14,8 @@ RUN addgroup -S app && adduser -S app -G app
 RUN apk add --no-cache uwsgi uwsgi-python3 nginx
 
 WORKDIR /app
-COPY server.crt /app/ssl/cert.pem
-COPY server.key /app/ssl/cert.key
+# COPY server.crt /app/ssl/cert.pem
+# COPY server.key /app/ssl/cert.key
 COPY supervisord.conf /app/supervisord.conf
 COPY nginx.conf /app/nginx.conf
 COPY uwsgi.ini /app/uwsgi.ini

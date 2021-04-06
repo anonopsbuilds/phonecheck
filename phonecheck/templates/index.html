@@ -5,70 +5,159 @@
     <meta charset=utf-8>
     <title>Preveri FB leak</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
-    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bulma.min.css') }}" />
+
+    <!-- COMMON TAGS -->
+    <meta charset="utf-8">
+    <title> So Facebooku ukradli tudi moje podatke?</title>
+    <!-- Search Engine -->
+    <meta name="description"
+        content="Družbenemu omrežju Facebook so zaradi pomanjkljivega varovanja ukradli osebne podatke 533 milijonov uporabnikov. Med ukradenimi podatki je tudi 110.178 telefonskih številk slovenskih uporabnikov">
+    <meta name="image" content="https://fb.rtfm.si/static/deletefb.jpg">
+    <!-- Schema.org for Google -->
+    <meta itemprop="name" content=" So Facebooku ukradli tudi moje podatke?">
+    <meta itemprop="description"
+        content="Družbenemu omrežju Facebook so zaradi pomanjkljivega varovanja ukradli osebne podatke 533 milijonov uporabnikov. Med ukradenimi podatki je tudi 110.178 telefonskih številk slovenskih uporabnikov">
+    <meta itemprop="image" content="https://fb.rtfm.si/static/deletefb.jpg">
+    <!-- Open Graph general (Facebook, Pinterest & Google+) -->
+    <meta name="og:title" content=" So Facebooku ukradli tudi moje podatke?">
+    <meta name="og:description"
+        content="Družbenemu omrežju Facebook so zaradi pomanjkljivega varovanja ukradli osebne podatke 533 milijonov uporabnikov. Med ukradenimi podatki je tudi 110.178 telefonskih številk slovenskih uporabnikov">
+    <meta name="og:image" content="https://fb.rtfm.si/static/deletefb.jpg">
+    <meta name="og:url" content="https://fb.rtfm.si">
+    <meta name="og:site_name" content=" So Facebooku ukradli tudi moje podatke?">
+    <meta name="og:locale" content="sl_SI">
+    <meta name="og:type" content="website">
+
+    <style>
+        table.center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
 </head>
 
 <body>
     <main class="container">
-        <section class="hero">
-            <h1>So Facebooku ukradli tudi moje podatke?</h1>
+        <section class="hero is-info">
+            <div class="hero-body">
+                <p class="title">
+                    So Facebooku ukradli tudi moje podatke?
+                </p>
+            </div>
         </section>
-        <section class="intro">
-            Družbenemu omrežju Facebook so zaradi pomanjkljivega varovanja ukradli osebne podatke 533 milijonov uporabnikov. Med ukradenimi podatki je tudi 110.178 telefonskih številk slovenskih uporabnikov, ki so jih hekerji objavili in dali brezplačno na voljo vsem. 
-            Več o tem si preberi na strani <a href="https://www.cert.si/razkrite-tel-stevilke-533-mio-facebook-uporabnikov/" target="_blank">SI-CERT</a> in v novici <a href="https://www.businessinsider.com/stolen-data-of-533-million-facebook-users-leaked-online-2021-4" target="_blank">Business Insiderja</a>. 
+
+        <section class="section intro content">
+            <p>
+                Družbenemu omrežju Facebook so zaradi pomanjkljivega varovanja ukradli osebne podatke 533 milijonov
+                uporabnikov. Med ukradenimi podatki je tudi 110.178 telefonskih številk slovenskih uporabnikov, ki so
+                jih
+                hekerji objavili in dali brezplačno na voljo vsem.
+                Več o tem si preberi na strani <a
+                    href="https://www.cert.si/razkrite-tel-stevilke-533-mio-facebook-uporabnikov/"
+                    target="_blank">SI-CERT</a> in v novici <a
+                    href="https://www.businessinsider.com/stolen-data-of-533-million-facebook-users-leaked-online-2021-4"
+                    target="_blank">Business Insiderja</a>.
+            </p>
 
 
-            Preveri, ali so bili tudi tvoji FB podatki ukradeni in objavljeni. 
+            <h3>Preveri, ali so bili tudi tvoji FB podatki ukradeni in objavljeni.</h3>
 
-V polje vnesi svojo telefonsko številko (v obliki +386xxxxxxxx ali v lokalni obliki) in iskalnik bo preveril, če so tudi tvoji podatki v ukradeni bazi. 
-V primeru, da so, ti bo iskalnik pokazal, kateri so ti podatki.
-
+            <p>
+                V polje vnesi svojo telefonsko številko (v obliki +386xxxxxxxx ali v lokalni obliki) in iskalnik bo
+                preveril, če so tudi tvoji podatki v ukradeni bazi.
+                V primeru, da so, ti bo iskalnik pokazal, kateri so ti podatki.
+            </p>
         </section>
-        <section class="form">
-            Vpisi telefonsko
-            {% if error %}
-            {{ error }}
-            {% endif %}
-            <form method="POST" action="/">
-                <input name="phone" type="tel" placeholder="+38631123456" />
-                <button type="submit"">Preveri</button>
-        </form>
-        </section>
-        <section class=" result">
-                    {% if phone %}
-                    <div>
-                        Telefon {{ phone }} {{ 'JE' if found else 'NI' }} objavljen.
-                        {% if leaked %}
-                        <dl>
-                            <dt>Ime</dt>
-                            <dd> {{ 'DA' if leaked['firstname'] else 'NE' }}</dd>
-                            <dt>Priimek</dt>
-                            <dd> {{ 'DA' if leaked['lastname'] else 'NE' }}</dd>
-                            <dt>Spol</dt>
-                            <dd> {{ 'DA' if leaked['sex'] else 'NE' }}</dd>
-                            <dt>Kraj</dt>
-                            <dd> {{ 'DA' if leaked['town'] else 'NE' }}</dd>
-                            <dt>Rojstni kraj</dt>
-                            <dd> {{ 'DA' if leaked['hometown'] else 'NE' }}</dd>
-                            <dt>Zakonski stan</dt>
-                            <dd> {{ 'DA' if leaked['marital_status'] else 'NE' }}</dd>
-                            <dt>Sluzba</dt>
-                            <dd> {{ 'DA' if leaked['job'] else 'NE' }}</dd>
-                            <dt>Datum registracije</dt>
-                            <dd> {{ 'DA' if leaked['reg_date'] else 'NE' }}</dd>
-                            <dt>E-posta</dt>
-                            <dd> {{ 'DA' if leaked['email'] else 'NE' }}</dd>
-                            <dt>Datum rojstva</dt>
-                            <dd> {{ 'DA' if leaked['dob'] else 'NE' }}</dd>
-                        </dl>
-                        {% endif %}
-
-                    </div>
+        <section class="section form">
+            <div class="columns is'mobile is-centered">
+                <div class="column is-half has-text-centered">
+                    {% if error %}
+                    {{ error }}
                     {% endif %}
+                    <form method="POST" action="/" class="box">
+                        <div class="field">
+                            <label class="label">Vpiši telefonsko:</label>
+                            <div class="control">
+                                <input name="phone" type="tel" placeholder="+386XXXXXXXX" />
+                            </div>
+                            <p class="help">Vpirsi telefonsko številko v mednarodnem ali lokalnem formatu</p>
+                        </div>
+                        <button type="submit"">Preveri</button>
+                </form>
+                </div>
+              </div>
         </section>
+        {% if phone %}
+        <section class=" notification has-text-centered is-light {{ 'is-danger' if found else 'is-primary' }}">
+                            {% if found %}
+                            Telefon {{ phone }} JE objavljen.
+                            {% else %}
+                            Tvoji podatki tokrat niso bili ukradeni in objavljeni. Vseeno pa razmisli, komu zaupaš svoje
+                            podatke in če je zaupanja vreden.
+                            {% endif %}
+        </section>
+        {% if leaked %}
+        <section>
+            <h6 class="title is-6 has-text-centered">Obljavljeni so bili naslednji tipi podatkov za dano telefonsko
+                številko</h6>
+            <table class="table center">
+                <thead>
+                    <th>Tip podatka</th>
+                    <th>Objavljeno</th>
+                </thead>
+                <tr>
+                    <td>Ime</td>
+                    <td>{{ 'DA' if leaked['firstname'] else 'NE' }}</td>
+                </tr>
+                <tr>
+                    <td>Priimek</td>
+                    <td> {{ 'DA' if leaked['lastname'] else 'NE' }}</td>
+                </tr>
+                <tr>
+                    <td>Spol</td>
+                    <td> {{ 'DA' if leaked['sex'] else 'NE' }}</td>
+                </tr>
+                <tr>
+                    <td>Kraj</td>
+                    <td> {{ 'DA' if leaked['town'] else 'NE' }}</td>
+                </tr>
+                <tr>
+                    <td>Rojstni kraj</td>
+                    <td> {{ 'DA' if leaked['hometown'] else 'NE' }}</td>
+                </tr>
+                <tr>
+                    <td>Zakonski stan</td>
+                    <td> {{ 'DA' if leaked['marital_status'] else 'NE' }}</td>
+                </tr>
+                <tr>
+                    <td>Služba</td>
+                    <td> {{ 'DA' if leaked['job'] else 'NE' }}</td>
+                </tr>
+                <tr>
+                    <td>E-pošta</td>
+                    <td> {{ 'DA' if leaked['email'] else 'NE' }}</td>
+                </tr>
+                <tr>
+                    <td>Datum rojstva</td>
+                    <td> {{ 'DA' if leaked['dob'] else 'NE' }}</td>
+                </tr>
+            </table>
+        </section>
+        {% endif %}
+        {% endif %}
         <section class="footer">
-            Tvojih iskanj ne beležimo. Vnos telefonske številke v nobenem primeru ne bo ogrozil tvoje zasebnosti. Zabeležimo le čas in datum iskanja, v primeru da se številka nahaja v bazi in ste bili prvi, ki ste jo iskali.
+            <div class="content has-text-centered">
+                <p>
+                    Tvojih iskanj ne beležimo. Vnos telefonske številke v nobenem primeru ne bo ogrozil tvoje
+                    zasebnosti.
+                    Zabeležimo le čas in datum iskanja, v primeru da se številka nahaja v bazi in ste bili prvi, ki ste
+                    jo
+                    iskali.
+                </p>
+            </div>
         </section>
     </main>
 </body>
+
 </html>

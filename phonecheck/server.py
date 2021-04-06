@@ -3,9 +3,8 @@ import sqlite3
 import time
 import os
 import phonenumbers
-from flask import Flask, Response, g, render_template, request, abort
+from flask import Flask, g, render_template, request
 from flask_limiter import Limiter
-from flask_limiter.util import get_remote_address
 
 app = Flask(__name__)
 
@@ -15,7 +14,15 @@ app.config.from_mapping(
     RATELIMIT_STORAGE_URL=os.getenv("RATELIMIT_STORAGE", "memory://"),
 )
 
-limiter = Limiter(app, key_func=get_remote_address, default_limits=["360 per hour"])
+
+def get_ipaddr():
+    if request.access_route:
+        return request.access_route[0]
+    else:
+        return request.remote_addr or "127.0.0.1"
+
+
+limiter = Limiter(app, key_func=get_ipaddr, default_limits=["360 per hour"])
 
 
 def get_db():

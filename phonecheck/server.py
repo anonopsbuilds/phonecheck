@@ -50,6 +50,9 @@ def home():
         try:
             cur = get_db().cursor()
             parsed = phonenumbers.parse(phone, "SI")
+            if parsed.country_code != 386:
+                return render_template("index.html", error="Iskanje deluje le za slovenske številke (+386)")
+
             formatted = phonenumbers.format_number(
                 parsed, phonenumbers.PhoneNumberFormat.E164
             )
